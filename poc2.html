@@ -13,14 +13,6 @@
     const ifr = document.getElementById('target');
     ifr.onload = () => {
       console.log('[POC] Iframe loaded — framing probably allowed');
-      try {
-        // Try things that may throw interesting errors
-        const loc = ifr.contentWindow.location.href;
-        console.log('[POC] location:', loc);
-      } catch (e) {
-        console.error('[POC] Cross-origin error:', e.name, e.message);
-        console.error('[POC] Full error string:', e.toString());
-      }
     };
     ifr.onerror = () => console.error('[POC] Iframe failed to load');
   </script>
